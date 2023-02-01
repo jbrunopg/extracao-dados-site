@@ -4,4 +4,4 @@ Extraí os dados de ações do site: https://www.fundamentus.com.br/resultado.ph
 
 ### Objetivo
 
-Presente projeto é feito para adicioná-lo ao meu portfólio profissional.
+Transformar uma tabela HTML em arquivo CSV.
