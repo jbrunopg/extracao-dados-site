@@ -1,16 +1,10 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[19]:
+# Importando biblioteca
 
 
 from urllib.request import urlopen, urlretrieve, Request
 from urllib.error import URLError, HTTPError
 from bs4 import BeautifulSoup
 import pandas as pd
-
-
-# In[20]:
 
 
 # Obtendo a tabela
@@ -28,8 +22,6 @@ soup = BeautifulSoup(html,'html.parser')
 lista =soup.find('table')
 
 
-# In[21]:
-
 
 #quantidade ações
 qtd = soup.findAll('span',class_='tips') 
@@ -37,9 +29,6 @@ qtd = range(int(len(qtd)-1)) #retira o ultimo registro para não ter erro
  
 #Declarando variáveis cards
 resumo = []
-
-
-# In[22]:
 
 
 #pega as primeiras informações que não entram no for
@@ -104,8 +93,6 @@ for i in qtd:
     print(e.status, e.reason)
 
 
-# In[33]:
-
 
 # Criando data frame
 
@@ -115,8 +102,6 @@ dataset.head(10000)
 
 display(dataset)
 
-
-# In[38]:
 
 
 # Nomeando dataframe
@@ -130,20 +115,62 @@ convert_dict = {'PL': float}
 tabela_acoes['PL']  = tabela_acoes['PL'].astype(convert_dict)
 
 
-# In[37]:
-
-
 #Tratamento de Dados Coluna ROE
 
 tabela_acoes['ROE'] = tabela_acoes['ROE'].str.replace('.', '', regex=True).replace(',', '.', regex=True).replace('%', '', regex=True)
 convert_dict = {'ROE': float}
 tabela_acoes['ROE']  = tabela_acoes['ROE'].astype(convert_dict)/100
 
-
-display(tabela.info())
-
-
-# In[ ]:
+#Tratamento de Dados Coluna ROE
+tabela_acoes['ROE'] = tabela_acoes['ROE'].str.replace('.', '', regex=True).replace(',', '.', regex=True).replace('%', '', regex=True)
+convert_dict = {'ROE': float}
+tabela_acoes['ROE']  = tabela_acoes['ROE'].astype(convert_dict)/100
+ 
+#Tratamento de Dados Coluna MrgLiq
+tabela_acoes['MrgLiq'] = tabela_acoes['MrgLiq'].str.replace('.', '', regex=True).replace(',', '.', regex=True).replace('%', '', regex=True)
+convert_dict = {'MrgLiq': float}
+tabela_acoes['MrgLiq']  = tabela_acoes['MrgLiq'].astype(convert_dict)/100
+ 
+#Tratamento de Dados Coluna DivBruta_por_Patri  
+tabela_acoes['DivBruta_por_Patri'] = tabela_acoes['DivBruta_por_Patri'].str.replace('.', '', regex=True).replace(',', '.', regex=True)
+convert_dict = {'DivBruta_por_Patri': float}
+tabela_acoes['DivBruta_por_Patri']  = tabela_acoes['DivBruta_por_Patri'].astype(convert_dict)
+ 
+#Tratamento de Dados Coluna Cresc_5a
+tabela_acoes['Cresc_5a'] = tabela_acoes['Cresc_5a'].str.replace('.', '', regex=True).replace(',', '.', regex=True).replace('%', '', regex=True)
+convert_dict = {'Cresc_5a': float}
+tabela_acoes['Cresc_5a']  = tabela_acoes['Cresc_5a'].astype(convert_dict)/100
+ 
+#Tratamento de Dados Coluna DividendYied
+dataset['DividendYied'] = dataset['DividendYied'].str.replace('.', '', regex=True).replace(',', '.', regex=True).replace('%', '', regex=True)
+convert_dict = {'DividendYied': float}
+dataset['DividendYied']  = dataset['DividendYied'].astype(convert_dict)/100
+ 
+#Tratamento de Dados Coluna ROIC
+tabela_acoes['ROIC'] = tabela_acoes['ROIC'].str.replace('.', '', regex=True).replace(',', '.', regex=True).replace('%', '', regex=True)
+convert_dict = {'ROIC': float}
+tabela_acoes['ROIC']  = tabela_acoes['ROIC'].astype(convert_dict)/100
+ 
+#Tratamento de Dados Coluna MrgEbit
+dataset['MrgEbit'] = dataset['MrgEbit'].str.replace('.', '', regex=True).replace(',', '.', regex=True).replace('%', '', regex=True)
+convert_dict = {'MrgEbit': float}
+dataset['MrgEbit']  = dataset['MrgEbit'].astype(convert_dict)/100
+ 
+#Tratamento de Dados Coluna PVP  
+tabela_acoes['PVP'] = tabela_acoes['PVP'].str.replace('.', '', regex=True).replace(',', '.', regex=True)
+convert_dict = {'PVP': float}
+tabela_acoes['PVP']  = tabela_acoes['PVP'].astype(convert_dict)
+ 
+ 
+#Tratamento de Dados Coluna EVEbit
+tabela_acoes['EVEbit'] = tabela_acoes['EVEbit'].str.replace('.', '', regex=True).replace(',', '.', regex=True)
+convert_dict = {'EVEbit': float}
+tabela_acoes['EVEbit']  = tabela_acoes['EVEbit'].astype(convert_dict)
+ 
+#Tratamento de Dados Coluna EVEbita
+tabela_acoes['EVEbita'] = tabela_acoes['EVEbita'].str.replace('.', '', regex=True).replace(',', '.', regex=True)
+convert_dict = {'EVEbita': float}
+tabela_acoes['EVEbita']  = tabela_acoes['EVEbita'].astype(convert_dict)
 
 
 
