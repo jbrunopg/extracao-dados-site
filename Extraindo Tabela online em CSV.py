@@ -163,3 +163,14 @@ tabela_acoes['EVEbit']  = tabela_acoes['EVEbit'].astype(convert_dict)
 tabela_acoes['EVEbita'] = tabela_acoes['EVEbita'].replace('.', '', regex=True).replace(',', '.', regex=True)
 convert_dict = {'EVEbita': float}
 tabela_acoes['EVEbita']  = tabela_acoes['EVEbita'].astype(convert_dict)
+
+#Blacklist de ações descontinuadas
+blacklist ={
+    'PTPA3'
+}
+ 
+#Filtragem de dados
+selecao = (tabela_acoes['PL'] >== 1) & (tabela_acoes['ROE'] > 0) & (tabela_acoes['ROE'] < 90) &  (tabela_acoes['MrgLiq'] > 0) & (tabela_acoes['DivBruta_por_Patri'] > 1.3) &  (tabela_acoes['Cresc_5a'] > 0.1)
+ 
+melhores_acoes = tabela_acoes[selecao].sort_values('PL', ascending=False)
+display(melhores_acoes)
