@@ -174,3 +174,33 @@ selecao = (tabela_acoes['PL'] >== 1) & (tabela_acoes['ROE'] > 0) & (tabela_acoes
  
 melhores_acoes = tabela_acoes[selecao].sort_values('PL', ascending=False)
 display(melhores_acoes)
+
+#Blacklist de ações descontinuadas
+blacklist ={
+    'PTPA3'
+}
+ 
+#Filtragem de dados
+selecao = (tabela_acoes['PL'] >== 1) & (tabela_acoes['ROE'] > 0) & (tabela_acoes['ROE'] < 90) &  (tabela_acoes['MrgLiq'] > 0) & (tabela_acoes['DivBruta_por_Patri'] > 1.3) &  (tabela_acoes['Cresc_5a'] > 0.1)
+ 
+melhores_acoes = tabela_acoes[selecao].sort_values('PL', ascending=False)
+display(melhores_acoes)
+
+#configura visualização de dados pelo python
+
+plt.rc('figure',figsize=(30,10))
+ 
+plt.rc('font', family='serif', size=8)
+ 
+area = plt.figure()
+
+#cria o gráfico pelo python
+dados_g1 = melhores_acoes.sort_values(by='PL', ascending=False)
+g1.barh(dados_g1.Papel,dados_g1.PL)
+g1.set_title('PL por ação')
+ 
+dados_g2 = melhores_acoes.sort_values(by='PVP', ascending=False)
+g2.barh(dados_g2.Papel,dados_g2.PVP)
+g2.set_title('PVP')
+ 
+area
